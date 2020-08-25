@@ -11,17 +11,25 @@ public class EmployeeModel {
     private String lastName;
     private String email;
     private SalaryModel salaryModel;
+    private DepartmentModel departmentModel;
 
     public EmployeeModel() {
 
     }
 
-    public EmployeeModel(String firstName, String lastName, String email, SalaryModel salaryModel) {
+    public EmployeeModel(String firstName, String lastName, String email, SalaryModel salaryModel, DepartmentModel departmentModel) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.salaryModel = salaryModel;
+        this.departmentModel = departmentModel;
     }
+    //    public EmployeeModel(String firstName, String lastName, String email, SalaryModel salaryModel) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.salaryModel = salaryModel;
+//    }
 
 //    public EmployeeModel(String firstName, String lastName, String email) {
 //        this.firstName = firstName;
@@ -30,8 +38,7 @@ public class EmployeeModel {
 //    }
 
     @Id //@Id annotation specifies the primary key of an entity.
-//    @GeneratedValue(strategy = GenerationType.AUTO) //@GeneratedValue provides for the specification of generation strategies for the values of primary keys.
-//    @GeneratedValue(strategy = GenerationType.IDENTITY) //not worked
+    @GeneratedValue(strategy = GenerationType.AUTO) //@GeneratedValue provides for the specification of generation strategies for the values of primary keys.
     public int getId() {
         return id;
     }
@@ -72,6 +79,16 @@ public class EmployeeModel {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "dept_id")
+    public DepartmentModel getDepartmentModel() {
+        return departmentModel;
+    }
+
+    public void setDepartmentModel(DepartmentModel departmentModel) {
+        this.departmentModel = departmentModel;
     }
 
     @Override
